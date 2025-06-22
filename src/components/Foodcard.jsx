@@ -4,8 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../slice/Cartslice"; // make sure the filename case matches
 
-const Foodcard = ({ id, name, price, desc, rating, img }) => {
-  
+const Foodcard = ({ id, name, price, desc, rating, img, HandleToast }) => {
   const dispatch = useDispatch();
 
   return (
@@ -26,10 +25,11 @@ const Foodcard = ({ id, name, price, desc, rating, img }) => {
           {rating}
         </span>
         <button
-          onClick={() =>
-            dispatch(addToCart({ id, name,img, price, rating, qty: 1 }))
-          }
-          className="p-1 bg-green-500 font-bold rounded-lg hover:bg-green-600 hover:text-white cursor-pointer text-sm"
+          onClick={() => {
+            dispatch(addToCart({ id, name, img, price, rating, qty: 1 }));
+            HandleToast(name);
+          }}
+          className="p-1 bg-green-500 font-bold rounded-lg hover:bg-green-600  hover:text-white cursor-pointer text-sm"
         >
           Add to Cart
         </button>
